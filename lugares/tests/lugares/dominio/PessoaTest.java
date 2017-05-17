@@ -1,8 +1,11 @@
-package dominio;
+package lugares.dominio;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import lugares.dominio.Lugares;
+import lugares.dominio.Pessoa;
 
 public class PessoaTest {
 

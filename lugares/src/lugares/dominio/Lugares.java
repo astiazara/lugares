@@ -1,4 +1,4 @@
-package dominio;
+package lugares.dominio;
 
 public class Lugares {
 
