@@ -22,8 +22,15 @@ public class Rankeador<T> {
 		}
 	}
 	
-	private List<RankItem> itens = new ArrayList<RankItem>();
+	private List<RankItem> itens;
 	
+	
+	public Rankeador(){
+		itens = new ArrayList<RankItem>();
+	}
+	public Rankeador(int quantidadeItensEstimada){
+		itens = new ArrayList<RankItem>(quantidadeItensEstimada);
+	}
 	
 	public void adicionar(T item, int pontuacao){
 		itens.add(new RankItem(item, pontuacao));

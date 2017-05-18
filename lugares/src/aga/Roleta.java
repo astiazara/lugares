@@ -12,7 +12,7 @@ public class Roleta<T> {
 	}
 	
 	public void adicionar(T item, int quantidade){
-		for(int i=0; i<quantidade; i++){
+		for(int i=0; i < quantidade; i++){
 			itens.add(item);
 		}
 	}
