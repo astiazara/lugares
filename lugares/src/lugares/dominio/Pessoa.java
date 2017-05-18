@@ -7,8 +7,8 @@ public class Pessoa {
 
 	private String nome;
 	private Lugares lugares;
-	private List<Integer> lugaresDesejados = new ArrayList<>(2);
-	private List<Integer> lugaresIndesejados = new ArrayList<>(5);
+	private List<Integer> lugaresDesejados = new ArrayList<Integer>(2);
+	private List<Integer> lugaresIndesejados = new ArrayList<Integer>(5);
 	
 	public Pessoa(Lugares lugares){
 		this.lugares = lugares;

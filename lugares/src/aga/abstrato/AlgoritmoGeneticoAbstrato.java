@@ -41,11 +41,11 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 
 	private void validarConfiguracoes(int tamanhoPopulacao) {
 		if(tamanhoPopulacao < 2){
-			throw new IllegalArgumentException("Tamanho da População < 2");
+			throw new IllegalArgumentException("Tamanho da Populaï¿½ï¿½o < 2");
 		}
 		
 		if((tamanhoElite + tamanhoEstrangeiros) > tamanhoPopulacao){
-			throw new IllegalArgumentException("Tamanho da Elite + Tamanho de Estrangeiros > Tamanho da População");
+			throw new IllegalArgumentException("Tamanho da Elite + Tamanho de Estrangeiros > Tamanho da Populaï¿½ï¿½o");
 		}
 	}
 
@@ -98,7 +98,7 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 	}
 
 	public List<T> rankear(List<T> populacao) {
-		Rankeador<T> rankeador = new Rankeador<>(populacao.size());
+		Rankeador<T> rankeador = new Rankeador<T>(populacao.size());
 		for(T individuo : populacao){
 			rankeador.adicionar(individuo, pontuar(individuo));
 		}
@@ -126,7 +126,7 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 	}
 	public void setPercentualChanceMutacao(int percentualChanceMutacao) {
 		if(percentualChanceMutacao < 0 || percentualChanceMutacao > 100){
-			throw new IllegalArgumentException("Percentual de chance de mutação deve estar entre 0 e 100 inclusives.");
+			throw new IllegalArgumentException("Percentual de chance de mutaï¿½ï¿½o deve estar entre 0 e 100 inclusives.");
 		}
 		this.percentualChanceMutacao = percentualChanceMutacao;
 	}

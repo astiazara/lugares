@@ -1,5 +1,8 @@
 package lugares.dominio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Lugares {
 
 	private Pessoa[] lugares;
@@ -32,6 +35,16 @@ public class Lugares {
 			}
 		}
 		return pontos;
+	}
+
+	public List<Pessoa> obterPessoas() {
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		for(Pessoa pessoa : lugares){
+			if(pessoa != null){
+				pessoas.add(pessoa);
+			}
+		}
+		return pessoas;
 	}
 	
 }

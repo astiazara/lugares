@@ -16,7 +16,6 @@ public class Rankeador<T> {
 			this.pontuacao = pontuacao;
 		}
 
-		@Override
 		public int compareTo(Rankeador<T>.RankItem o) {
 			return Integer.compare(pontuacao, o.pontuacao);
 		}
