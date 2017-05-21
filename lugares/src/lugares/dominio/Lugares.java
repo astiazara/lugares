@@ -84,5 +84,15 @@ public class Lugares {
 	public boolean ehVago(int i) {
 		return get(i) == null;
 	}
+
+	public boolean sentarOndeVago(Pessoa pessoa) {
+		for (int i = 0; i < lugares.length; i++) {
+			if(ehVago(i)){
+				set(pessoa, i);
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }
