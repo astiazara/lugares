@@ -35,7 +35,7 @@ public class Pessoa {
 	}
 	
 	private void validarSatisfacao(int satisfacao){
-		if(satisfacao < MENOR_SATISFACAO || satisfacao >= MAIOR_SATISFACAO){
+		if(satisfacao < MENOR_SATISFACAO || satisfacao > MAIOR_SATISFACAO){
 			throw new IllegalArgumentException("Satisfação fora do intervalo permitido.");
 		}
 	}

@@ -78,7 +78,7 @@ public class Lugares {
 	}
 	
 	public boolean contem(Pessoa pessoa){
-		return indiceDe(pessoa) == -1;
+		return indiceDe(pessoa) != -1;
 	}
 
 	public boolean ehVago(int i) {

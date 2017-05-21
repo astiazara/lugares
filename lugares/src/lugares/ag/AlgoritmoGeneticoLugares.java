@@ -74,12 +74,23 @@ public class AlgoritmoGeneticoLugares extends AlgoritmoGeneticoAbstrato<Lugares>
 		Pessoa pessoa1 = filho.get(indicePessoa1);
 		filho.remover(indicePessoa1);
 		
-		int indicePessoa2 = Rand.random.nextInt(filho.getTotal());
+		int indicePessoa2;
+		do{
+			indicePessoa2 = Rand.random.nextInt(filho.getTotal());
+		} while(indicePessoa2 == indicePessoa1);
+			
 		Pessoa pessoa2 = filho.get(indicePessoa2);
 		filho.remover(indicePessoa2);
 		
 		filho.set(pessoa1, indicePessoa2);
 		filho.set(pessoa2, indicePessoa1);
+	}
+
+	public Lugares getPrototipo() {
+		return prototipo;
+	}
+	public void setPrototipo(Lugares prototipo) {
+		this.prototipo = prototipo;
 	}
 
 }
