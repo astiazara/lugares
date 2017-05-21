@@ -24,7 +24,7 @@ public class AlgoritmoGeneticoTeste extends AlgoritmoGeneticoAbstrato<String> {
 	}
 
 	@Override
-	protected String cruzar(String pai, String mae, boolean mutacao) {
+	protected String cruzar(String pai, String mae) {
 		char[] genesPai = pai.toCharArray();
 		char[] genesMae = mae.toCharArray();
 		char[] genesFilho = new char[4];
@@ -50,6 +50,10 @@ public class AlgoritmoGeneticoTeste extends AlgoritmoGeneticoAbstrato<String> {
 			}
 		}
 		return pontos;
+	}
+
+	@Override
+	protected void mutar(String filho) {
 	}
 
 }

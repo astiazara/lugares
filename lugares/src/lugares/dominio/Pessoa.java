@@ -1,17 +1,18 @@
 package lugares.dominio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Pessoa {
 
+	public static final int MENOR_SATISFACAO = 0;
+	public static final int MAIOR_SATISFACAO = 100;
+	
 	private String nome;
 	private Lugares lugares;
-	private List<Integer> lugaresDesejados = new ArrayList<Integer>(2);
-	private List<Integer> lugaresIndesejados = new ArrayList<Integer>(5);
+	private int[] satisfacao;
+	
 	
 	public Pessoa(Lugares lugares){
 		this.lugares = lugares;
+		satisfacao = new int[lugares.getTotal()];
 	}
 	
 	public String getNome() {
@@ -21,33 +22,21 @@ public class Pessoa {
 		this.nome = nome;
 	}
 	
-	public void adicionarLugarDesejado(Integer indiceLugar){
+	public void setSatisfacao(int indiceLugar, int satisfacaoLugar){
+		lugares.validarIndiceLugar(indiceLugar);
+		validarSatisfacao(satisfacaoLugar);
+		
+		satisfacao[indiceLugar] = satisfacaoLugar;
+	}
+	public int getSatisfacao(int indiceLugar){
 		lugares.validarIndiceLugar(indiceLugar);
 		
-		if(!lugaresDesejados.contains(indiceLugar)){
-			lugaresDesejados.add(indiceLugar);
-			lugaresIndesejados.remove(indiceLugar);
-		}
+		return satisfacao[indiceLugar];
 	}
 	
-	public void adicionarLugarIndesejado(Integer indiceLugar){
-		lugares.validarIndiceLugar(indiceLugar);
-		
-		if(!lugaresIndesejados.contains(indiceLugar)){
-			lugaresIndesejados.add(indiceLugar);
-			lugaresDesejados.remove(indiceLugar);
-		}
-	}
-
-	public int pontuar(Integer indiceLugar){
-		lugares.validarIndiceLugar(indiceLugar);
-		
-		if(lugaresDesejados.contains(indiceLugar)){
-			return lugares.getTotal() - lugaresDesejados.indexOf(indiceLugar);
-		} else if(lugaresIndesejados.contains(indiceLugar)){
-			return lugaresIndesejados.indexOf(indiceLugar) - lugares.getTotal();
-		} else {
-			return 0;
+	private void validarSatisfacao(int satisfacao){
+		if(satisfacao < MENOR_SATISFACAO || satisfacao >= MAIOR_SATISFACAO){
+			throw new IllegalArgumentException("Satisfação fora do intervalo permitido.");
 		}
 	}
 	

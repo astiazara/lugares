@@ -12,7 +12,7 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 	private int tamanhoElite = 1;
 	private int tamanhoEstrangeiros = 1;
 	private int percentualChanceMutacao = 1;
-		
+
 	public List<T> criarPopulacaoRandomica(int tamanhoPopulacao) {
 		List<T> populacao = new ArrayList<T>(tamanhoPopulacao);
 		for (int i = 0; i < tamanhoPopulacao; i++) {
@@ -41,11 +41,11 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 
 	private void validarConfiguracoes(int tamanhoPopulacao) {
 		if(tamanhoPopulacao < 2){
-			throw new IllegalArgumentException("Tamanho da Popula��o < 2");
+			throw new IllegalArgumentException("Tamanho da Populacao < 2");
 		}
 		
 		if((tamanhoElite + tamanhoEstrangeiros) > tamanhoPopulacao){
-			throw new IllegalArgumentException("Tamanho da Elite + Tamanho de Estrangeiros > Tamanho da Popula��o");
+			throw new IllegalArgumentException("Tamanho da Elite + Tamanho de Estrangeiros > Tamanho da Populacao");
 		}
 	}
 
@@ -74,12 +74,14 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 	private T criarFilho(Roleta<T> roletaPais) {
 		T pai = roletaPais.girar();
 		T mae = roletaPais.girar();
-		boolean mutacao = sortearMutacao();
-		
-		return cruzar(pai, mae, mutacao);
+		T filho = cruzar(pai, mae);
+		if(deveMutar()){
+			mutar(filho);
+		}
+		return filho;
 	}
 
-	private boolean sortearMutacao() {
+	private boolean deveMutar() {
 		if(percentualChanceMutacao == 0){
 			return false;
 		} else {
@@ -87,7 +89,9 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 		}
 	}
 	
-	protected abstract T cruzar(T pai, T mae, boolean mutacao);
+	protected abstract T cruzar(T pai, T mae);
+	
+	protected abstract void mutar(T filho);
 	
 	private Roleta<T> criarRoletaPais(List<T> rank) {
 		Roleta<T> roleta = new Roleta<T>();
@@ -111,6 +115,9 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 		return tamanhoElite;
 	}
 	public void setTamanhoElite(int tamanhoElite) {
+		if(tamanhoElite < 0){
+			throw new IllegalArgumentException("Tamanho da Elite deve ser igual ou maior que zero.");
+		}
 		this.tamanhoElite = tamanhoElite;
 	}
 
@@ -118,6 +125,9 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 		return tamanhoEstrangeiros;
 	}
 	public void setTamanhoEstrangeiros(int tamanhoEstrangeiros) {
+		if(tamanhoEstrangeiros < 0){
+			throw new IllegalArgumentException("Tamanho de Estrangeiros deve ser igual ou maior que zero.");
+		}
 		this.tamanhoEstrangeiros = tamanhoEstrangeiros;
 	}
 
@@ -126,7 +136,7 @@ public abstract class AlgoritmoGeneticoAbstrato<T> {
 	}
 	public void setPercentualChanceMutacao(int percentualChanceMutacao) {
 		if(percentualChanceMutacao < 0 || percentualChanceMutacao > 100){
-			throw new IllegalArgumentException("Percentual de chance de muta��o deve estar entre 0 e 100 inclusives.");
+			throw new IllegalArgumentException("Percentual de chance de mutacao deve estar entre 0 e 100 inclusives.");
 		}
 		this.percentualChanceMutacao = percentualChanceMutacao;
 	}

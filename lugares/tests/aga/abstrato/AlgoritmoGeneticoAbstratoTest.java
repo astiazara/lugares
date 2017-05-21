@@ -24,7 +24,7 @@ public class AlgoritmoGeneticoAbstratoTest {
 		
 		do{
 			List<String> rank = ag.rankear(populacaoAtual);
-			System.out.println("\nGeração " + geracao);
+			System.out.println("\nGeracao " + geracao);
 			for(String palavra : rank){
 				System.out.println(palavra + " " + ag.pontuar(palavra));
 			}

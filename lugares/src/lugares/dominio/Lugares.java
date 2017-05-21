@@ -7,13 +7,29 @@ public class Lugares {
 
 	private Pessoa[] lugares;
 	
+	
 	public Lugares(int total){
+		if(total < 2){
+			throw new IllegalArgumentException("Total deve ser no minimo 2.");
+		}
 		lugares = new Pessoa[total];
 	}
 	
 	public void set(Pessoa pessoa, int indiceLugar){
 		validarIndiceLugar(indiceLugar);
+		if(contem(pessoa)){
+			throw new IllegalArgumentException("Pessoa jah atribuida");
+		}
 		lugares[indiceLugar] = pessoa;
+	}
+	public Pessoa get(int indiceLugar){
+		validarIndiceLugar(indiceLugar);
+		return lugares[indiceLugar];
+	}
+	
+	public void remover(int indiceLugar){
+		validarIndiceLugar(indiceLugar);
+		lugares[indiceLugar] = null;
 	}
 
 	void validarIndiceLugar(int indiceLugar) {
@@ -26,15 +42,16 @@ public class Lugares {
 		return lugares.length;
 	}
 	
-	public int pontuar(){
-		int pontos = 0;
+	public Estatisticas calcularEstatisticas(){
+		Estatisticas estatisticas = new Estatisticas();
+		
 		for (int i = 0; i < lugares.length; i++) {
 			Pessoa pessoa = lugares[i];
 			if(pessoa != null){
-				pontos += pessoa.pontuar(i);
+				estatisticas.computar(pessoa.getSatisfacao(i));
 			}
 		}
-		return pontos;
+		return estatisticas;
 	}
 
 	public List<Pessoa> obterPessoas() {
@@ -45,6 +62,27 @@ public class Lugares {
 			}
 		}
 		return pessoas;
+	}
+	
+	public int indiceDe(Pessoa pessoa){
+		if(pessoa == null){
+			throw new IllegalArgumentException("Pessoa nao pode ser nula");
+		}
+		
+		for (int i = 0; i < lugares.length; i++) {
+			if(lugares[i] == pessoa){
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public boolean contem(Pessoa pessoa){
+		return indiceDe(pessoa) == -1;
+	}
+
+	public boolean ehVago(int i) {
+		return get(i) == null;
 	}
 	
 }
